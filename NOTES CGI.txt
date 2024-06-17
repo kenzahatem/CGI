@@ -1,0 +1,84 @@
+CGI est un programme hébérgé sur un serveur.
+moyen pour ajouter du contenu dynamique à une page web.
+CGI: common gateway interface (interface de passerelle commune)
+permet un échange de données entre des applications et des serveurs web 
+ les pages HTML ne doivent pas être entièrement disponibles sur le serveur, mais sont générées dynamiquement dès qu’un utilisateur fait une demande appropriée via le site Web
+
+
+
+Explication concrète : 
+quand l'utilisateur saisi des données,  celles-ci ne sont pas transmise au serveur, mais passe d'abord par un logiciel externe (  ici un script CGI) qui peut afficher les informations nouvellement ajoutées en HTML,
+les programmes CGI sont situées dans un dossier séparé du serveur web 
+peu importe le langage du script CGI , le serveur web pourra communiquer avec lui 
+exemple d'utilisation : panier d'achat , commentaire , formulaire, test de l'applications
+
+Les méthodes de transfert de données  : 
+QUERY_STRING :  requête utilisateur
+PATH_INFO : transmettre des infos contextuelles au site web 
+Stdin : traiter les autres saisie de l'utilisateur 
+
+Avantage : 
+n'ont ps besoin d'être srocké sur le serveur
+compatible avec divers langages donc peut être facilement intégrés dans des structures existantes
+aucun coût d'utilisation
+
+
+Inconvénient :
+temp de réponse assez long ( le programme doit être redémarré àa chaque entrée)
+peut avoir accès à toutes les données si aucune restriction est mis en place
+
+
+Alternatives : 
+ASP (Active Server Pages) par Microsoft 
+PHP peut réaliser une grande partie de ce que CGI fait 
+
+
+
+Ecrire un script CGI : 
+#!/bin/bash 
+echo "Content-type: text/html"
+echo ""
+echo "<html><body>"
+echo "<h1>Bonjour, ceci est un script CGI en Bash</h1>"
+echo "</body></html>"
+
+Cela affiche => Bonjour, ceci est un script CGI en Bash
+
+
+
+Exemple d'un formulaire : 
+Mise en place  : 
+dans var/www/html => créer un formulaire formulaire.html et comme action on rajoute le fichier cgi qui affcihe les informations transmises
+action="cgi-bin/form_handler.cgi" qui est placé dans le répertoire usr/lib/cgi-bin
+
+$POST_DATA => les données transmises
+nous pouvons également extraire les données une par une.
+
+
+Exemple d'interaction avec le système : 
+interact.cgi => le résultat est joint en image 
+df-h => cette commande affiche l'utilisation des systèmes.
+on la mets dans une balise <pre></pre> pour grader les sauts de ligne etc ..
+
+
+Exemple des variables d'environnements du serveur web.
+
+
+Exemple de génération de centenu dynamique 
+
+Exemple de manipulation des fichiers :lecture (avec cat) écriture (echo, et direction vers le fichier en question ">>") etc 
+Egalement à l'aide des bibliothèques externes comme l'envoi des mail (non testé).
+
+
+Notes supplémentaires : 
+son focntionnement : 
+Stateless : ne conservent pas les informations, lance un processus àa chque exéuttion 
+les scripts CGI peuvent recevoir des données via les méthodes GET et POST_DATA
+Les variables d'environnement : 
+REQUEST_METHOD : la méthode http utilisé get ou post
+CONTENT_LENGTH : la longueur du contenu envoyé par la méthode POST 
+POST_DATA : les données envoyés 
+QUERY_STRING : les variables passées dans l'url quand GET est utilisée
+REMOTE_ADDR : l'adresse ip du client 
+REMOTE_HOST : le nom de l'hôte
+Exemple : infos.cgi 

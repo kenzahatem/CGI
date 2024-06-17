@@ -1,0 +1,13 @@
+Executer PHP en ligne de commande sans serveur web 
+sudo apt-get install php-cli 
+création d'un fichier php avec comme contenu :
+<?php
+echo "Bonjour, ceci est un script PHP exécuté en ligne de commande\n";?>
+
+sur la console : 
+php script.php
+Cela affichera : 
+Bonjour, ceci est un script PHP exécuté en ligne de commande
+
+
+
